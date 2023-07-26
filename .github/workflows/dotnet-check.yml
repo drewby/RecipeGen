@@ -1,0 +1,29 @@
+name: .NET CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Lint
+      run: dotnet format --check
+    - name: Test
+      run: dotnet test --collect:"XPlat Code Coverage"
+    - name: Generate report
+      run: dotnet tool install -g dotnet-reportgenerator-globaltool && reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:./coverage" "-reporttypes:HTMLInline;HTMLChart"
+    - name: Archive coverage reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: dotnet-coverage-report
+        path: ./coverage
