@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{831E0C01-8B31-49BB-A037-D1CED228D56F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeGen", "src\webapi\RecipeGen.csproj", "{1D78BE98-945C-4759-9B98-81775690F8D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tst", "tst", "{0431EBDC-BABE-47D9-9B47-79467466D74E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeGen.Tests", "tst\webapi\RecipeGen.Tests.csproj", "{E94F5D67-93CF-4745-BE8C-508E6915338C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D78BE98-945C-4759-9B98-81775690F8D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D78BE98-945C-4759-9B98-81775690F8D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D78BE98-945C-4759-9B98-81775690F8D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D78BE98-945C-4759-9B98-81775690F8D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E94F5D67-93CF-4745-BE8C-508E6915338C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E94F5D67-93CF-4745-BE8C-508E6915338C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E94F5D67-93CF-4745-BE8C-508E6915338C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E94F5D67-93CF-4745-BE8C-508E6915338C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1D78BE98-945C-4759-9B98-81775690F8D3} = {831E0C01-8B31-49BB-A037-D1CED228D56F}
+		{E94F5D67-93CF-4745-BE8C-508E6915338C} = {0431EBDC-BABE-47D9-9B47-79467466D74E}
+	EndGlobalSection
+EndGlobal
