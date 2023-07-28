@@ -6,21 +6,21 @@ namespace RecipeGen.Observability;
 
 public static class HealthExtensions
 {
-    public static WebApplicationBuilder AddHealth(this WebApplicationBuilder builder)
-    {
-        builder = builder ?? throw new ArgumentNullException(nameof(builder));
+  public static WebApplicationBuilder AddHealth(this WebApplicationBuilder builder)
+  {
+    builder = builder ?? throw new ArgumentNullException(nameof(builder));
 
-        builder.Services.AddHealthChecks();
+    builder.Services.AddHealthChecks();
 
-        return builder;
-    }
+    return builder;
+  }
 
-    public static IEndpointRouteBuilder UseHealth(this IEndpointRouteBuilder app)
-    {
-        app = app ?? throw new ArgumentNullException(nameof(app));
+  public static IEndpointRouteBuilder UseHealth(this IEndpointRouteBuilder app)
+  {
+    app = app ?? throw new ArgumentNullException(nameof(app));
 
-        app.MapHealthChecks("/health");
+    app.MapHealthChecks("/health");
 
-        return app;
-    }
+    return app;
+  }
 }

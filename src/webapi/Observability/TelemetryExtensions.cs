@@ -14,6 +14,8 @@ public static class ConfigureTelemetry
 
   public static WebApplicationBuilder AddTelemetry(this WebApplicationBuilder builder)
   {
+    builder = builder ?? throw new ArgumentNullException(nameof(builder));
+
     var logger = new LoggerConfiguration()
         .ReadFrom
         .Configuration(builder.Configuration)
