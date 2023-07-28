@@ -3,6 +3,10 @@ name: .NET CI
 on:
   pull_request:
     branches: [ main ]
+    paths:
+      - 'RecipeGen.sln'
+      - 'src/webapi/**'
+      - 'tst/webapi/**'
 
 jobs:
   build:
@@ -17,7 +21,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Lint
-      run: dotnet format --check
+      run: dotnet format --verify-no-changes
     - name: Test
       run: dotnet test --collect:"XPlat Code Coverage"
     - name: Generate report
