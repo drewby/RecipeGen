@@ -7,5 +7,5 @@ namespace RecipeGen.Services;
 
 public interface IGenerativeAIService
 {
-  Task<RecipeResponse> GenerateRecipeAsync(string modelName, RecipeRequest request);
+    Task<RecipeResponse> GenerateRecipeAsync(string modelName, RecipeRequest request);
 }

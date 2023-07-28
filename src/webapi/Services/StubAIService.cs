@@ -8,30 +8,30 @@ namespace RecipeGen.Services;
 
 public class StubAIService : IGenerativeAIService
 {
-  public Task<RecipeResponse> GenerateRecipeAsync(string modelName, RecipeRequest request)
-  {
-    return Task.FromResult(new RecipeResponse
+    public Task<RecipeResponse> GenerateRecipeAsync(string modelName, RecipeRequest request)
     {
-      Metrics = new ModelMetrics
-      {
-        Prompt = "Prompts/20001",
-        Model = "gpt-3.5-turbo",
-        MaxTokens = 1000,
-        Temperature = 1.0f,
-        FrequencyPenalty = 0.0f,
-        PresencePenalty = 0.0f,
-        PromptLength = 515,
-        RecipeLength = 1000,
-        PromptTokens = 100,
-        CompletionTokens = 900,
-        FinishReason = "stop",
-        TimeTaken = 1000
-      },
-      Recipe = new Recipe
-      {
-        Name = "Chocolate Chip Cookies",
-        Description = "A delicious chocolate chip cookie recipe",
-        Parts = new List<Part> {
+        return Task.FromResult(new RecipeResponse
+        {
+            Metrics = new ModelMetrics
+            {
+                Prompt = "Prompts/20001",
+                Model = "gpt-3.5-turbo",
+                MaxTokens = 1000,
+                Temperature = 1.0f,
+                FrequencyPenalty = 0.0f,
+                PresencePenalty = 0.0f,
+                PromptLength = 515,
+                RecipeLength = 1000,
+                PromptTokens = 100,
+                CompletionTokens = 900,
+                FinishReason = "stop",
+                TimeTaken = 1000
+            },
+            Recipe = new Recipe
+            {
+                Name = "Chocolate Chip Cookies",
+                Description = "A delicious chocolate chip cookie recipe",
+                Parts = new List<Part> {
           new Part {
             Name = "Chocolate Chip Cookies",
             Ingredients = new List<string> {
@@ -54,7 +54,7 @@ public class StubAIService : IGenerativeAIService
             }
           }
         }
-      }
-    });
-  }
+            }
+        });
+    }
 }

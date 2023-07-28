@@ -4,5 +4,5 @@ namespace RecipeGen.Constants;
 
 internal static class PromptKeys
 {
-  internal const string PlaceHolder = "{{RecipeRequest}}";
+    internal const string PlaceHolder = "{{RecipeRequest}}";
 }

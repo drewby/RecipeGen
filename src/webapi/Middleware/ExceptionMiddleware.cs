@@ -8,37 +8,37 @@ namespace RecipeGen.Middleware;
 
 internal class ExceptionMiddleware
 {
-  private readonly RequestDelegate _next;
-  private readonly ILogger<ExceptionMiddleware> _logger;
+    private readonly RequestDelegate _next;
+    private readonly ILogger<ExceptionMiddleware> _logger;
 
-  public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
-  {
-    _logger = logger;
-    _next = next;
-  }
+    public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+    {
+        _logger = logger;
+        _next = next;
+    }
 
 #pragma warning disable CA1031 // Do not catch general exception types
-  public async Task InvokeAsync(HttpContext httpContext)
-  {
-    try
+    public async Task InvokeAsync(HttpContext httpContext)
     {
-      await _next(httpContext);
+        try
+        {
+            await _next(httpContext);
+        }
+        catch (Exception ex)
+        {
+            LogActions.ServerException(_logger, ex);
+            await HandleExceptionAsync(httpContext, ex);
+        }
     }
-    catch (Exception ex)
+
+    private static Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-      LogActions.ServerException(_logger, ex);
-      await HandleExceptionAsync(httpContext, ex);
+        // contenttype is plain text
+        context.Response.ContentType = "text/plain";
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+        var message = "Internal Server Error.";
+
+        return context.Response.WriteAsync(message);
     }
-  }
-
-  private static Task HandleExceptionAsync(HttpContext context, Exception exception)
-  {
-    // contenttype is plain text
-    context.Response.ContentType = "text/plain";
-    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-
-    var message = "Internal Server Error.";
-
-    return context.Response.WriteAsync(message);
-  }
 }

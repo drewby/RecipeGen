@@ -6,5 +6,5 @@ namespace RecipeGen.Wrappers;
 
 public interface IOpenAIClientWrapper
 {
-  Task<ChatCompletionResult> GetChatCompletionsAsync(string modelName, ChatCompletionsOptions options);
+    Task<ChatCompletionResult> GetChatCompletionsAsync(string modelName, ChatCompletionsOptions options);
 }

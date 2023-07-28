@@ -9,16 +9,16 @@ namespace RecipeGen.Models;
 /// </summary>
 public class Part
 {
-  /// <summary>
-  /// The name of the part.
-  /// </summary>
-  public string Name { get; set; } = null!;
-  /// <summary>
-  /// The ingredients of the part.
-  /// </summary>
-  public IList<string> Ingredients { get; init; } = new List<string>();
-  /// <summary>
-  /// The steps of the part.
-  /// </summary>
-  public IList<string> Steps { get; init; } = new List<string>();
+    /// <summary>
+    /// The name of the part.
+    /// </summary>
+    public string Name { get; set; } = null!;
+    /// <summary>
+    /// The ingredients of the part.
+    /// </summary>
+    public IList<string> Ingredients { get; init; } = new List<string>();
+    /// <summary>
+    /// The steps of the part.
+    /// </summary>
+    public IList<string> Steps { get; init; } = new List<string>();
 }

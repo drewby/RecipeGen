@@ -7,5 +7,5 @@ namespace RecipeGen.Services;
 
 public interface IPromptService
 {
-  Prompt GetPrompt(RecipeRequest request);
+    Prompt GetPrompt(RecipeRequest request);
 }

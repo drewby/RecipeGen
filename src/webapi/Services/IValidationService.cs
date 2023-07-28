@@ -7,6 +7,6 @@ namespace RecipeGen.Services;
 
 public interface IValidationService
 {
-  ValidationResult ValidateRecipeRequest(RecipeRequest request);
-  ValidationResult ValidateId(string id);
+    ValidationResult ValidateRecipeRequest(RecipeRequest request);
+    ValidationResult ValidateId(string id);
 }
