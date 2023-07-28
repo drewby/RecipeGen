@@ -1,0 +1,34 @@
+{
+	"name": "RecipeGen",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {},
+		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Orta.vscode-jest",
+				"dbaeumer.vscode-eslint",
+				"github.vscode-github-actions",
+				"ms-azuretools.vscode-docker",
+				"ms-vscode.makefile-tools"
+			]
+		}
+	},
+	"postCreateCommand": "npm install -g eslint jest",
+	"forwardPorts": [
+		3000,
+		9090
+	],
+	"portsAttributes": {
+		"3000": {
+			"name": "Grafana"
+		},
+		"9090": {
+			"name": "Prometheus"
+		}
+	}
+}
