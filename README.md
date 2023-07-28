@@ -2,6 +2,9 @@
 
 Welcome to RecipeGen, an open-source application powered by Generative AI to curate innovative and unique recipes based on your descriptions. Whether you want a "delicious crispy salad", "an appetizer for a pirate-themed party", or something distinct by mixing up two different cuisines, RecipeGen is here to assist.
 
+![RecipeGen Screenshot](./doc/recipegen.png)
+
+
 This project is implemented using an ASP.NET Core 7 WebAPI and a React client. It can use either the [OpenAI](https://platform.openai.com/overview) or [Azure OpenAI](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/) services.
 
 ## Getting Started
