@@ -102,7 +102,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "Recipes generated",
+      "description": "Completion tokens",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -126,6 +126,69 @@
         "h": 4,
         "w": 5,
         "x": 5,
+        "y": 1
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "floor(sum(rate(recipegen_completiontokens_count[24h])) * 60 * 60 * 24)",
+          "instant": false,
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Total Completion Tokens",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "Recipes generated",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 10,
         "y": 1
       },
       "id": 15,
@@ -165,70 +228,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "Prompt tokens",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 5,
-        "x": 10,
-        "y": 1
-      },
-      "id": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "10.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "editorMode": "code",
-          "expr": "sum(floor(rate(recipegen_prompttokens_count[24h]) * 60 * 60 * 24))",
-          "instant": false,
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Total Prompt Tokens",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "description": "Completion tokens",
+      "description": "Recipes disliked",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -254,7 +254,7 @@
         "x": 15,
         "y": 1
       },
-      "id": 13,
+      "id": 22,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -277,13 +277,13 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "floor(sum(rate(recipegen_completiontokens_count[24h])) * 60 * 60 * 24)",
+          "expr": "floor(sum(rate(recipegen_dislikedrecipes_count[24h])) * 60 * 60 * 24)",
           "instant": false,
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Total Completion Tokens",
+      "title": "Total Dislikes",
       "type": "stat"
     },
     {
@@ -347,7 +347,70 @@
           "refId": "A"
         }
       ],
-      "title": "Costs",
+      "title": "Estimated Costs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "Prompt tokens",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 5
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "sum(floor(rate(recipegen_prompttokens_count[24h]) * 60 * 60 * 24))",
+          "instant": false,
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Total Prompt Tokens",
       "type": "stat"
     },
     {
@@ -356,7 +419,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 9
       },
       "id": 6,
       "panels": [],
@@ -392,7 +455,7 @@
         "h": 4,
         "w": 5,
         "x": 0,
-        "y": 9
+        "y": 10
       },
       "id": 2,
       "options": {
@@ -455,7 +518,7 @@
         "h": 4,
         "w": 5,
         "x": 5,
-        "y": 9
+        "y": 10
       },
       "id": 7,
       "options": {
@@ -518,7 +581,7 @@
         "h": 4,
         "w": 5,
         "x": 10,
-        "y": 9
+        "y": 10
       },
       "id": 4,
       "options": {
@@ -581,7 +644,7 @@
         "h": 4,
         "w": 5,
         "x": 15,
-        "y": 9
+        "y": 10
       },
       "id": 5,
       "options": {
@@ -621,7 +684,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 14
       },
       "id": 8,
       "panels": [],
@@ -693,7 +756,7 @@
         "h": 6,
         "w": 5,
         "x": 0,
-        "y": 14
+        "y": 15
       },
       "id": 9,
       "options": {
@@ -789,7 +852,7 @@
         "h": 6,
         "w": 5,
         "x": 5,
-        "y": 14
+        "y": 15
       },
       "id": 10,
       "options": {
@@ -885,7 +948,7 @@
         "h": 6,
         "w": 5,
         "x": 10,
-        "y": 14
+        "y": 15
       },
       "id": 16,
       "options": {
@@ -981,7 +1044,7 @@
         "h": 6,
         "w": 5,
         "x": 15,
-        "y": 14
+        "y": 15
       },
       "id": 17,
       "options": {
@@ -1002,8 +1065,8 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "editorMode": "code",
-          "expr": "sum(rate(recipegen_likedrecipes_count[1m]))",
+          "editorMode": "builder",
+          "expr": "sum by(language) (rate(recipegen_likedrecipes_count[1m]))",
           "instant": false,
           "range": true,
           "refId": "A"
@@ -1078,7 +1141,7 @@
         "h": 6,
         "w": 5,
         "x": 0,
-        "y": 20
+        "y": 21
       },
       "id": 19,
       "options": {
@@ -1169,7 +1232,7 @@
         "h": 6,
         "w": 5,
         "x": 5,
-        "y": 20
+        "y": 21
       },
       "id": 20,
       "options": {
@@ -1199,6 +1262,102 @@
       ],
       "title": "Elapsed Completion Time",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "dark-yellow",
+                "value": 80000
+              },
+              {
+                "color": "dark-red",
+                "value": 90000
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 15,
+        "y": 21
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "sum by(language) (rate(recipegen_dislikedrecipes_count[1m]))",
+          "instant": false,
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Dislikes ",
+      "type": "timeseries"
     }
   ],
   "refresh": "5s",
@@ -1209,7 +1368,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
