@@ -3,6 +3,8 @@ name: Node Lint and Test
 on:
   pull_request:
     branches: [ main ]
+    paths:
+      - 'src/app/**'
 
 jobs:
   build:
