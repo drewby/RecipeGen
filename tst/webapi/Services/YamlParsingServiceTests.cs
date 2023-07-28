@@ -21,7 +21,7 @@ Parts:
     Ingredients:
     - 1 cup of flour
     - 1 cup of sugar  
-    Steps: 
+    Steps:
     - Mix ingredients
     - Bake at 350 degrees for 10 minutes
 ");
@@ -53,7 +53,7 @@ Parts:
     Ingredients:
     - 1 cup of flour
     - 1 cup of sugar  
-    Steps: 
+    Steps:
     - Mix ingredients
     - Bake at 350 degrees for 10 minutes
 Enjoy your delicious cookies!

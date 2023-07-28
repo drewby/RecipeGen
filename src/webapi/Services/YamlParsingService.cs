@@ -17,13 +17,13 @@ public class YamlParsingService : IParsingService
 
   public YamlParsingService()
   {
-    _ignoreLinesRegex = new Regex(@"^(Name|Description|PreparationTime|Servings|Parts:|Ingredients:|Steps:|(\s+-\s+))\s*(?<value>.*)$");
+    _ignoreLinesRegex = new Regex(@"^(Name:|Description:|PreparationTime:|Servings:|Parts:|\s+Ingredients:|\s+Steps:|(\s+-\s+))\s*(?<value>.*)$", RegexOptions.Multiline);
     _deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
   }
 
   public Recipe ParseRecipeResponse(string response)
   {
-    _ignoreLinesRegex.Replace(response, "");
+    response = FilterYaml(response);
     Recipe result;
     try
     {
@@ -53,5 +53,21 @@ public class YamlParsingService : IParsingService
     }
 
     return result;
+  }
+
+  public string FilterYaml(string input)
+  {
+    var lines = input.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+    List<string> filteredLines = new List<string>();
+
+    foreach (var line in lines)
+    {
+      if (_ignoreLinesRegex.IsMatch(line))
+      {
+        filteredLines.Add(line);
+      }
+    }
+
+    return string.Join("\n", filteredLines);
   }
 }
