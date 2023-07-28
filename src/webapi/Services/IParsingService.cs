@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: MIT
 using RecipeGen.Models;
 using RecipeGen.Models.Requests;
+using RecipeGen.Models.Responses;
 
 namespace RecipeGen.Services;
 
-public interface IValidationService
+public interface IParsingService
 {
-  ValidationResult ValidateRecipeRequest(RecipeRequest request);
-  ValidationResult ValidateId(string id);
+  Recipe ParseRecipeResponse(string response);
 }

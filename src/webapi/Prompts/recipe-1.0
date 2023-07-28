@@ -20,6 +20,7 @@ Parts:
 
 #Guidelines
 - Don't confuse 'Language' with 'Cuisine'.
+- If no details in request, create a random delicious recipe.
 - 'Include Ingredients' doesn't limit your recipe.
 - Usually one 'Part' per recipe. Multiple 'Parts' for major components.
 - Each 'Part' contains a name, ingredients, and steps.

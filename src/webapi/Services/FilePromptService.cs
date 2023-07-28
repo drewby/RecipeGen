@@ -15,53 +15,53 @@ namespace RecipeGen.Services;
 /// with RecipeRequest serialized as YAML.
 public class FilePromptService : IPromptService
 {
-    private readonly ILogger<FilePromptService> _logger;
-    private readonly IConfiguration _configuration;
-    private readonly string? _promptFile;
-    private readonly string _template;
-    private readonly ISerializer _serializer;
+  private readonly ILogger<FilePromptService> _logger;
+  private readonly IConfiguration _configuration;
+  private readonly string? _promptFile;
+  private readonly string _template;
+  private readonly ISerializer _serializer;
 
-    public FilePromptService(ILogger<FilePromptService> logger, IConfiguration configuration)
+  public FilePromptService(ILogger<FilePromptService> logger, IConfiguration configuration)
+  {
+    _logger = logger;
+    _configuration = configuration;
+
+    _promptFile = _configuration[ConfigKeys.PromptFile];
+    if (string.IsNullOrWhiteSpace(_promptFile))
     {
-        _logger = logger;
-        _configuration = configuration;
-
-        _promptFile = _configuration[ConfigKeys.PromptFile];
-        if (string.IsNullOrWhiteSpace(_promptFile))
-        {
-            throw new ConfigException($"{ConfigKeys.PromptFile} is not configured.");
-        }
-        if (!File.Exists(_promptFile))
-        {
-            throw new ConfigException($"{ConfigKeys.PromptFile} '{_promptFile}' does not exist.");
-        }
-
-        _template = File.ReadAllText(_promptFile);
-
-        _serializer = new SerializerBuilder().Build();
+      throw new ConfigException($"{ConfigKeys.PromptFile} is not configured.");
+    }
+    if (!File.Exists(_promptFile))
+    {
+      throw new ConfigException($"{ConfigKeys.PromptFile} '{_promptFile}' does not exist.");
     }
 
-    public Prompt GetPrompt(RecipeRequest request)
+    _template = File.ReadAllText(_promptFile);
+
+    _serializer = new SerializerBuilder().Build();
+  }
+
+  public Prompt GetPrompt(RecipeRequest request)
+  {
+    request = request ?? throw new ArgumentNullException(nameof(request));
+
+    var yaml = _serializer.Serialize(request);
+
+    string prompt;
+    prompt = _template.Replace(PromptKeys.PlaceHolder, yaml, StringComparison.Ordinal);
+
+    const string system = "\nSystem:\n";
+
+    // look for a line "System:" and split the prompt into two parts
+    // if it exists
+    var systemIndex = prompt.IndexOf(system, StringComparison.Ordinal);
+    string? systemMessage = null;
+    if (systemIndex > 0)
     {
-        request = request ?? throw new ArgumentNullException(nameof(request));
-
-        var yaml = _serializer.Serialize(request);
-
-        string prompt;
-        prompt = _template.Replace(PromptKeys.PlaceHolder, yaml, StringComparison.Ordinal);
-
-        const string system = "\nSystem:\n";
-
-        // look for a line "System:" and split the prompt into two parts
-        // if it exists
-        var systemIndex = prompt.IndexOf(system, StringComparison.Ordinal);
-        string? systemMessage = null;
-        if (systemIndex > 0)
-        {
-            systemMessage = prompt.Substring(systemIndex + system.Length);
-            prompt = prompt.Substring(0, systemIndex);
-        }
-
-        return new Prompt(_promptFile!, prompt, systemMessage);
+      systemMessage = prompt.Substring(systemIndex + system.Length);
+      prompt = prompt.Substring(0, systemIndex);
     }
+
+    return new Prompt(_promptFile!, prompt, systemMessage);
+  }
 }

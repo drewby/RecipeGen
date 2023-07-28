@@ -5,13 +5,13 @@ using System.Diagnostics.CodeAnalysis;
 namespace RecipeGen.Models.Exceptions;
 
 [ExcludeFromCodeCoverage]
-public class ConfigException : Exception
+public class ParsingException : Exception
 {
-  public ConfigException() { }
+  public ParsingException() { }
 
-  public ConfigException(string message)
+  public ParsingException(string message)
       : base(message) { }
 
-  public ConfigException(string message, Exception inner)
+  public ParsingException(string message, Exception inner)
       : base(message, inner) { }
 }
