@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: '18'
     - name: Install dependencies
-      run: cd src/app && npm ci
+      run: cd src/app && npm ci && npm install -g eslint
     - name: Lint
       run: cd src/app && eslint --max-warnings 0 .
     - name: Test
