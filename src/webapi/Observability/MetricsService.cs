@@ -51,6 +51,7 @@ internal class MetricsService
     return new[]
     {
       new KeyValuePair<string, object?>("prompt", modelMetrics.Prompt),
+      new KeyValuePair<string, object?>("language", modelMetrics.Language),
       new KeyValuePair<string, object?>("model", modelMetrics.Model),
       new KeyValuePair<string, object?>("maxtokens", modelMetrics.MaxTokens),
       new KeyValuePair<string, object?>("frequencypenalty", modelMetrics.FrequencyPenalty),

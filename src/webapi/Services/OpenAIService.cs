@@ -45,6 +45,8 @@ public class OpenAIService : IGenerativeAIService
 
   public async Task<RecipeResponse> GenerateRecipeAsync(string modelName, RecipeRequest request)
   {
+    request = request ?? throw new ArgumentNullException(nameof(request));
+
     var prompt = _promptService.GetPrompt(request);
     LogActions.DebugPromptCreated(_logger, prompt.UserMessage, null);
 
@@ -55,7 +57,7 @@ public class OpenAIService : IGenerativeAIService
     timer.Stop();
     LogActions.DebugRecipeGenerated(_logger, response.Content, null);
 
-    var modelMetrics = GetMetrics(modelName, prompt, timer, response);
+    var modelMetrics = GetMetrics(modelName, prompt, request.Language, timer, response);
     LogActions.RecipeGenerated(_logger, modelMetrics, null);
     MetricsService.RecordMetrics(modelMetrics);
 
@@ -82,13 +84,14 @@ public class OpenAIService : IGenerativeAIService
     return recipeResponse;
   }
 
-  private ModelMetrics GetMetrics(string modelName, Prompt prompt, Stopwatch timer, ChatCompletionResult response)
+  private ModelMetrics GetMetrics(string modelName, Prompt prompt, string Language, Stopwatch timer, ChatCompletionResult response)
   {
     return new ModelMetrics()
     {
       TimeTaken = timer.ElapsedMilliseconds,
       Model = modelName,
       Prompt = prompt.Name,
+      Language = Language,
       MaxTokens = _maxTokens,
       Temperature = _temperature,
       FrequencyPenalty = _frequencyPenalty,
