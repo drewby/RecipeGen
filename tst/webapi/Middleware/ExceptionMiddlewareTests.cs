@@ -11,26 +11,26 @@ namespace RecipeGen.Tests.Middleware;
 
 public class ExceptionMiddlewareTests
 {
-    [Fact]
-    public async Task InvokeAsync_WhenExceptionIsThrown_LogsException()
-    {
-        // Arrange
-        var logger = new Mock<ILogger<ExceptionMiddleware>>();
-        logger.Setup(l => l.IsEnabled(It.IsAny<LogLevel>())).Returns(true);
-        var middleware = new ExceptionMiddleware((innerHttpContext) => throw new Exception(), logger.Object);
-        var context = new DefaultHttpContext();
+  [Fact]
+  public async Task InvokeAsync_WhenExceptionIsThrown_LogsException()
+  {
+    // Arrange
+    var logger = new Mock<ILogger<ExceptionMiddleware>>();
+    logger.Setup(l => l.IsEnabled(It.IsAny<LogLevel>())).Returns(true);
+    var middleware = new ExceptionMiddleware((innerHttpContext) => throw new Exception(), logger.Object);
+    var context = new DefaultHttpContext();
 
-        // Act
-        await middleware.InvokeAsync(context);
+    // Act
+    await middleware.InvokeAsync(context);
 
-        // Assert
-        logger.Verify(
-          x => x.Log(
-            LogLevel.Error,
-            It.IsAny<EventId>(),
-            It.IsAny<It.IsAnyType>(),
-            It.IsAny<Exception>(),
-            It.IsAny<Func<It.IsAnyType, Exception?, string>>()),
-          Times.Once);
-    }
+    // Assert
+    logger.Verify(
+      x => x.Log(
+        LogLevel.Error,
+        It.IsAny<EventId>(),
+        It.IsAny<It.IsAnyType>(),
+        It.IsAny<Exception>(),
+        It.IsAny<Func<It.IsAnyType, Exception?, string>>()),
+      Times.Once);
+  }
 }
