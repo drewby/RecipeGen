@@ -53,10 +53,14 @@ public class ModelMetrics
   /// The number of milliseconds it took to generate the Recipe.
   /// </summary>
   public long TimeTaken { get; set; }
+  /// <summary>
+  /// The language that was requested from the AI model.
+  /// </summary>
+  public string Language { get; set; } = null!;
 
   public override string ToString()
   {
-    return $"Prompt: {Prompt}, Model: {Model}, MaxTokens: {MaxTokens}, " +
+    return $"Prompt: {Prompt}, Language: {Language}, Model: {Model}, MaxTokens: {MaxTokens}, " +
            $"FrequencyPenalty: {FrequencyPenalty}, PresencePenalty: {PresencePenalty}, " +
            $"Temperature: {Temperature}, PromptLength: {PromptLength}, " +
            $"RecipeLength: {RecipeLength}, PromptTokens: {PromptTokens}, " +
