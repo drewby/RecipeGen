@@ -23,6 +23,8 @@ public class YamlParsingService : IParsingService
 
   public Recipe ParseRecipeResponse(string response)
   {
+    if (string.IsNullOrWhiteSpace(response)) { throw new ArgumentException("response is null or whitespace"); }
+
     response = FilterYaml(response);
     Recipe result;
     try
@@ -55,7 +57,7 @@ public class YamlParsingService : IParsingService
     return result;
   }
 
-  public string FilterYaml(string input)
+  private string FilterYaml(string input)
   {
     var lines = input.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
     List<string> filteredLines = new List<string>();
