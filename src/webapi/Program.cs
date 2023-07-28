@@ -25,6 +25,7 @@ internal class Program
         builder.AddHealth();
 
         builder.Services.AddSingleton<IValidationService, ValidationService>();
+    builder.Services.AddSingleton<IParsingService, YamlParsingService>();
         builder.Services.AddSingleton<IGenerativeAIService, OpenAIService>();
         // builder.Services.AddSingleton<IGenerativeAIService, StubAIService>();
         builder.Services.AddSingleton<IPromptService, FilePromptService>();
