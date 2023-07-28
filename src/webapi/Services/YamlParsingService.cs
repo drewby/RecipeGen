@@ -34,7 +34,8 @@ public class YamlParsingService : IParsingService
       throw new ParsingException("Could not parse response", ex);
     }
 
-    if (string.IsNullOrEmpty(result.Name) ||
+    if (result == null ||
+        string.IsNullOrEmpty(result.Name) ||
         string.IsNullOrEmpty(result.Description) ||
         result.Parts.Count < 1)
     {
