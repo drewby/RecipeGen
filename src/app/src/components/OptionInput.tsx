@@ -6,6 +6,7 @@ import { useIntl } from 'react-intl';
 interface Props { 
   optionType: string;
   tags: string[];
+  autocompleteOptions?: string[];
   onAddTag: (tag: string) => void;
   onRemoveTag: (index: number) => void;
 } 
@@ -26,8 +27,16 @@ interface TextInputProps {
 export const TextInput: FC<TextInputProps> = ({ value, onKeyDown, onChange, onBlur, optionType }) => { 
   const intl = useIntl();
 
+  const optionsData = optionType === 'includeIngredients'
+                      || optionType === 'excludeIngredients' 
+                      ? 'ingredients' 
+                      : optionType;
+
+  const options:string[] = require(`../assets/tags/${optionsData}.json`);
+
   return ( 
-    <input type="text" 
+    <div>
+        <input type="text" 
            className="tagInput" 
            placeholder={intl.formatMessage({ id: `recipeRequestOptions.${optionType}` })} 
            value={value} 
@@ -35,6 +44,12 @@ export const TextInput: FC<TextInputProps> = ({ value, onKeyDown, onChange, onBl
            onChange={onChange} 
            onBlur={onBlur} 
            list={optionType} />
+        <datalist id={optionType}> 
+          {options.sort().map((option, index) => ( 
+            <option key={index} value={option} /> 
+          ))} 
+        </datalist> 
+      </div>
    );
 };
 
@@ -97,11 +112,6 @@ export default class OptionInput extends Component<Props, State> {
           onChange={this.handleChange} 
           onKeyDown={this.handleKeyDown} 
           onBlur={this.handleBlur} /> 
-        <datalist id={this.props.optionType}> 
-          {this.state.options.map((option, index) => ( 
-            <option key={index} value={option} /> 
-          ))} 
-        </datalist> 
         <div className="tags"> 
           {this.props.tags.map((tag, index) => ( 
             <span className="tag" key={index}> 
