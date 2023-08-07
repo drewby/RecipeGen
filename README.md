@@ -1,15 +1,16 @@
-# RecipeGen - Generative AI-powered Recipe Creator
+# RecipeGen - Generative AI-Powered Recipe Creator
 
-Welcome to RecipeGen, an open-source application powered by Generative AI to curate innovative and unique recipes based on your descriptions. Whether you want a "delicious crispy salad", "an appetizer for a pirate-themed party", or something distinct by mixing up two different cuisines, RecipeGen is here to assist.
+Welcome to RecipeGen, an open-source application powered by Generative AI that curates innovative and unique recipes based on your descriptions. Whether you're craving a "delicious crispy salad", need an "appetizer for a pirate-themed party", or wish to blend two different cuisines, RecipeGen is here to assist.
 
 There is a working version of RecipeGen with a few extra features running at [YumPop.ai](https://yumpop.ai).
 
 ![RecipeGen Screenshot](./doc/recipegen.png)
 
-
-This project is implemented using an ASP.NET Core 7 WebAPI and a React client. It can use either the [OpenAI](https://platform.openai.com/overview) or [Azure OpenAI](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/) services.
+This project is implemented using ASP.NET Core 7 WebAPI and a React client. It can use either the [OpenAI](https://platform.openai.com/overview) or [Azure OpenAI](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/) services.
 
 ## Getting Started
+
+Should you encounter any issues getting started, please create an issue. 
 
 ### Prerequisites
 
@@ -17,11 +18,25 @@ Before you begin, ensure you have met the following requirements:
 
 - You have obtained a key from either [OpenAI](https://platform.openai.com/overview) or [Azure OpenAI](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/) services. 
 - You have installed the latest version of [Docker](https://www.docker.com/products/docker-desktop) and [Visual Studio Code](https://code.visualstudio.com/Download) (if not using Codespaces).
-- You possess a basic understanding of ASP.NET Core, React, and Generative AI.
+- You have a basic understanding of ASP.NET Core, React, and Generative AI.
 
 ### Running RecipeGen
 
-The easiest way to get started is to run the application in the provided `devcontainer` using a tool like [Visual Studio Code](https://code.visualstudio.com/), or in [GitHub Codespaces](https://docs.github.com/en/codespaces/overview).
+The most straightforward way to run the application is with Docker:
+
+**OpenAI**
+```bash
+docker run -e OpenAiKey=<your OpenAI key> -p 8080:8080 ghcr.io/drewby/recipegen:main
+```
+
+**Azure OpenAI**
+```bash
+docker run -e AzureOpenAIUri=<your Azure OpenAI Uri> -e AzureOpenAiKey=<your Azure OpenAI key> -e OpenAIModelName=<your model deployment name> -p 8080:8080 ghcr.io/drewby/recipegen:main
+```
+
+After launching, you can open your browser and navigate to http://localhost:8080 to start creating recipes.
+
+You can also run the application in the provided `devcontainer` using a tool like [Visual Studio Code](https://code.visualstudio.com/), or in [GitHub Codespaces](https://docs.github.com/en/codespaces/overview). This will allow you to modify parts of the application and experiment.
 
 If you create a Github Codespace, you can skip the first two steps below.
 
@@ -31,11 +46,13 @@ If you create a Github Codespace, you can skip the first two steps below.
     git clone https://github.com/drewby/RecipeGen.git
     ```
 
-2. **Open the project in Visual Studio Code**: Upon opening, you will be prompted to "Reopen in Container". This will start the build of the Docker container.
+2. **Open the project in Visual Studio Code**: Upon opening, you will be prompted to "Reopen in Container". This will initiate the build of the Docker container.
 
-3. **Set Environment Variables**: Populate either the `OpenAIKey` or the `AzureOpenAIUri` and `AzureOpenAIKey` values in a new `.env` file in the root of the project. There is a `.env.sample` for reference.
+3. **Set Environment Variables**: Populate either the `OpenAIKey` or the `AzureOpenAIUri` and `AzureOpenAIKey` values in a new `.env` file in the root of the project. For Azure OpenAI, you'll also want to define the `OpenAIModelName` which should match the name you gave your deployment. There is a `.env.sample` for reference.
 
-4. **Start the application**: Press `F5` or `Shift-F5`. 
+4. **Start the webapi**: Press `F5` or `Shift-F5`. 
+
+5. **Start the React client**: Open a terminal with ```Ctrl-Shift-` ```. Change directories to `src/app`. Run `npm start`.  
 
 ## Using RecipeGen
 
@@ -76,10 +93,11 @@ Refer to the `.env.sample` in the root of the project for a reference configurat
 
 ## Observability 
 
-Observability is a key attribute of RecipeGen, enabling us to monitor and understand the application's behavior, interactions with users, and the performance of the underlying Generateive AI model. It provides real-time insights into the system, supporting data-driven decisions for continuous improvement.
+Observability is a crucial attribute of RecipeGen, allowing us to monitor and understand the application's behavior, user interactions, and the performance of the underlying Generative AI model. It offers real-time insights into the system, supporting data-driven decisions for continuous improvement.
 
-Here's a brief overview of the key metrics we've set up for RecipeGen, their unit of measurement, and the insights they provide:
+The dev container includes an instance of [Prometheus](https://prometheus.io) at http://localhost:9090, which gathers metrics from the running application. There is also an instance of [Grafana](https://grafana.com) at http://localhost:3000 with a built-in dashboard for visualizing the metrics.
 
+Here's an overview of the key metrics set up for RecipeGen, their unit of measurement, and the insights they provide:
 
 1. **`recipegen_recipecount`** (_count_): This counts the total number of recipes generated, indicating the system's overall usage.
 
