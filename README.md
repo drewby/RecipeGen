@@ -2,6 +2,8 @@
 
 Welcome to RecipeGen, an open-source application powered by Generative AI to curate innovative and unique recipes based on your descriptions. Whether you want a "delicious crispy salad", "an appetizer for a pirate-themed party", or something distinct by mixing up two different cuisines, RecipeGen is here to assist.
 
+There is a working version of RecipeGen with a few extra features running at [YumPop.ai](https://yumpop.ai).
+
 ![RecipeGen Screenshot](./doc/recipegen.png)
 
 
