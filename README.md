@@ -95,7 +95,7 @@ Refer to the `.env.sample` in the root of the project for a reference configurat
 
 Observability is a crucial attribute of RecipeGen, allowing us to monitor and understand the application's behavior, user interactions, and the performance of the underlying Generative AI model. It offers real-time insights into the system, supporting data-driven decisions for continuous improvement.
 
-The dev container includes an instance of [Prometheus](https://prometheus.io) at http://localhost:9090, which gathers metrics from the running application. There is also an instance of [Grafana](https://grafana.com) at http://localhost:3000 with a built-in dashboard for visualizing the metrics.
+The dev container includes an instance of [Prometheus](https://prometheus.io) at http://localhost:9090, which gathers metrics from the running application. There is also an instance of [Grafana](https://grafana.com) at http://localhost:3000 with a built-in dashboard for visualizing the metrics. The grafana username is `admin` and the password is `admin`.
 
 Here's an overview of the key metrics set up for RecipeGen, their unit of measurement, and the insights they provide:
 
