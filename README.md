@@ -52,7 +52,7 @@ If you create a Github Codespace, you can skip the first two steps below.
 
 4. **Start the webapi**: Press `F5` or `Shift-F5`. 
 
-5. **Start the React client**: Open a terminal with ```Ctrl-Shift-` ```. Change directories to `src/app`. Run `npm start`.  
+5. **Start the React client**: Open a terminal with ```Ctrl-Shift-` ```. Change directories to `src/app`. Run `npm install`, and then `npm start`.  
 
 ## Using RecipeGen
 
